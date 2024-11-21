@@ -4,6 +4,7 @@ import whisper
 import os
 import subprocess
 
+# Configura Flask y habilita CORS
 app = Flask(__name__, static_folder="frontend")
 CORS(app)  # Habilitar CORS para todas las rutas
 
@@ -29,6 +30,9 @@ def download_audio(video_url):
 
 @app.route("/generate", methods=["POST"])
 def generate():
+    """
+    Endpoint para procesar el video y generar subtítulos.
+    """
     data = request.json
     video_url = data.get("videoUrl")
     print("URL recibida:", video_url)  # Log para confirmar el enlace
@@ -59,10 +63,15 @@ def generate():
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
 def serve_frontend(path):
+    """
+    Sirve los archivos del frontend (HTML, JS, CSS).
+    """
     if path and os.path.exists(os.path.join(app.static_folder, path)):
         return send_from_directory(app.static_folder, path)
     else:
         return send_from_directory(app.static_folder, "index.html")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # Configuración para funcionar tanto en local como en producción
+    port = int(os.environ.get("PORT", 5000))  # Render establece la variable PORT
+    app.run(host="0.0.0.0", port=port)
