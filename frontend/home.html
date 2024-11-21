@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Analizador de Videos</title>
+        <style>
+            /* Spinner */
+            .spinner {
+                margin: 0 auto;
+                width: 50px;
+                height: 50px;
+                border: 5px solid #ccc;
+                border-top: 5px solid #3498db;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            /* Estilo general */
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            form {
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            #results {
+                margin-top: 20px;
+                font-size: 16px;
+            }
+
+            #loading {
+                text-align: center;
+                margin-top: 20px;
+                font-size: 18px;
+                font-weight: bold;
+                color: #333;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+                background-color: #3498db;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+            }
+
+            button:hover {
+                background-color: #2980b9;
+            }
+
+            input {
+                padding: 10px;
+                font-size: 16px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                margin-right: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Analizador de Videos de Youtube</h1>
+        <form id="videoForm">
+            <label for="video_url">Enlace del video:</label>
+            <input
+                type="text"
+                id="video_url"
+                placeholder="https://www.youtube.com/watch?v=..."
+                required
+            />
+            <button type="submit">Obtener Subtítulos</button>
+        </form>
+
+        <form id="keywordForm" style="display: none">
+            <label for="keyword">Buscar palabra clave:</label>
+            <input
+                type="text"
+                id="keyword"
+                placeholder="Escribe una palabra clave"
+            />
+            <button type="submit">Buscar</button>
+        </form>
+
+        <button id="downloadButton" style="display: none">
+            Descargar Subtítulos
+        </button>
+
+        <div id="results"></div>
+
+        <div id="loading" style="display: none">
+            <div class="spinner"></div>
+            <p>Procesando, por favor espera...</p>
+        </div>
+
+        <script src="app.js"></script>
+    </body>
+</html>
